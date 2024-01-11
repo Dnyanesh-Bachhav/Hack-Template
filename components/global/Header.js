@@ -3,6 +3,7 @@ import {View,Text,Image,StyleSheet,StatusBar,TouchableOpacity, Pressable} from '
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { COLORS } from '../constants';
+import { AlignJustify } from '@tamagui/lucide-icons';
 function Header({ headerText, icon }){
   return(
     <View style={styles.container}>
@@ -11,14 +12,14 @@ function Header({ headerText, icon }){
             console.log("Icon pressed...");
         //   navigation.openDrawer();
         }} >
-          <FontAwesome5 name="bars" size={21} color={COLORS.white}/>
+          { icon }
           </Pressable>
       </View>
-      <Text style={styles.textStyle}>CoinStack</Text>
+      <Text style={styles.textStyle}>{ headerText }</Text>
       <View style={styles.iconStyle}>
         <TouchableOpacity>
           {/* Add Element */}
-          {/* <AntDesign name="caretdown" size={21} color={COLORS.white}/> */}
+          <AntDesign name="caretdown" size={21} color={COLORS.white}/>
         </TouchableOpacity>
       </View>
 
