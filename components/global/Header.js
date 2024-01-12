@@ -4,24 +4,19 @@ import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { COLORS } from '../constants';
 import { AlignJustify } from '@tamagui/lucide-icons';
-function Header({ headerText, icon }){
+function Header({ headerText, icon, onPressFunction }){
   return(
     <View style={styles.container}>
       <View style={{justifyContent: 'center'}}>
         <Pressable onPress={()=>{
             console.log("Icon pressed...");
+            onPressFunction();
         //   navigation.openDrawer();
         }} >
           { icon }
           </Pressable>
       </View>
       <Text style={styles.textStyle}>{ headerText }</Text>
-      <View style={styles.iconStyle}>
-        <TouchableOpacity>
-          {/* Add Element */}
-          <AntDesign name="caretdown" size={21} color={COLORS.white}/>
-        </TouchableOpacity>
-      </View>
 
     </View>
   );

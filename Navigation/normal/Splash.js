@@ -1,24 +1,23 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React, {useEffect} from 'react';
-import { useNavigation } from '@react-navigation/native';
 
-const Splash = () => {
-  const navigation = useNavigation();
+const Splash = ({navigation}) => {
   useEffect(() => {
-    console.log("Splash...");
     setTimeout(() => {
-      // navigation.navigate('Parent');
+      console.log("HI in a screen...")
+      navigation.navigate('Parent');
     }, 2000);
   }, []);
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 20 }}>Splash</Text>
+      <Text style={{ fontSize: 40 }} >Splash</Text>
     </View>
   );
 };
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        // borderWidth: 2,
         justifyContent: 'center',
         alignItems: 'center'
     }

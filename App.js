@@ -10,8 +10,13 @@ import config from "./tamagui.config";
 import { createTamagui } from "@tamagui/core";
 import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from "./Navigation/AppNavigator";
+import { createStackNavigator } from "@react-navigation/stack";
+import Splash from "./Navigation/normal/Splash";
+import Parent from "./Navigation/normal/Parent";
+import { AuthProvider } from "./contexts/AuthProviderContext";
 const tamaguiConfig = createTamagui(config);
 
+const Stack = createStackNavigator();
 export default function App() {
   const [loaded] = useFonts({
     Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
@@ -19,10 +24,13 @@ export default function App() {
   });
   return (
     <View style={styles.container}>
-      <TamaguiProvider config={tamaguiConfig}>
+       <TamaguiProvider config={config}>
+        <AuthProvider>
+
         <NavigationContainer>
-          <AppNavigator />
+          <AppNavigator/>
         </NavigationContainer>
+        </AuthProvider>
       </TamaguiProvider>
       <StatusBar style="auto" backgroundColor={"#632791"} />
     </View>
@@ -32,8 +40,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
 });

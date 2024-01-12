@@ -23,6 +23,11 @@ import { Paragraph, SizableText } from "tamagui";
 import { Accordion } from "tamagui";
 import { Square } from "tamagui";
 import { ChevronDown } from "@tamagui/lucide-icons";
+import * as Sharing from "expo-sharing";
+import { Asset, useAssets } from "expo-asset";
+import * as FileSystem from "expo-file-system";
+import { Collapse, CollapseBody, CollapseHeader } from "accordion-collapse-react-native";
+import { AuthContext } from "../../contexts/AuthProviderContext";
 // import {
 //   Collapse,
 //   CollapseHeader,
@@ -32,7 +37,37 @@ import { ChevronDown } from "@tamagui/lucide-icons";
 const Drawer = createDrawerNavigator();
 
 function CustomDrawer(props) {
+  const { user, setUser, firestoreUser, signOut } = useContext(AuthContext);
   const [open,setOpen] = useState(false);
+  const handleShare = async () => {
+    const isAvailable = await Sharing.isAvailableAsync();
+
+    if (isAvailable) {
+      //  console.log("Sharing available...");
+      //  const [asset,error] = useAssets(require("../../assets/logo.png"));
+      //  console.log(asset);
+      //  console.log("Sharing is available...");
+      //  await Sharing.shareAsync({
+      //      dialogTitle: "Download the app Now...!!!"
+      //  })
+      const asset = Asset.fromModule(require("../../assets/Promotion.png"));
+      await asset.downloadAsync();
+      const tmpFile = FileSystem.cacheDirectory + "Promotion.png";
+
+      try {
+        // sharing only works with `file://` urls on Android so we need to copy it out of assets
+        await FileSystem.copyAsync({ from: asset.localUri, to: tmpFile });
+        await Sharing.shareAsync(tmpFile, {
+          dialogTitle: "Is it a snake or a hat?",
+        });
+      } catch (e) {
+        console.error(e);
+      }
+      // await Sharing.shareAsync("../assets/banner1.png");
+    } else {
+      Alert.alert("Sharing is not available...");
+    }
+  };
   useEffect(() => {
     // console.log("User on custome drawer:" + JSON.stringify(user));
   }, []);
@@ -40,7 +75,7 @@ function CustomDrawer(props) {
     <View style={styles.container}>
       <DrawerContentScrollView
         {...props}
-        contentContainerStyle={{ backgroundColor: COLORS.secondary }}
+        contentContainerStyle={{ backgroundColor: COLORS.white }}
       >
         <View style={styles.userInfo}>
           <View
@@ -63,19 +98,46 @@ function CustomDrawer(props) {
             fontWeight={"bold"}
             style={{ marginLeft: 0 }}
           >
-            Dnyanesh Bachhav
+            {firestoreUser?.name}
           </SizableText>
+          <Collapse onToggle={(val)=>{
+            setOpen(val);
+          }} >
+            <CollapseHeader
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+              onPress={() => {
+                console.log("Cliked");
+                setOpen(!open);
+              }} 
+            >
+              <Paragraph size={"$5"} fontWeight={"600"}>
+                {firestoreUser?.email}
+              </Paragraph>
+              <View>
+                <Square animation="quick" rotate={open ? "180deg" : "0deg"}>
+                  <ChevronDown size="$1" />
+                </Square>
+              </View>
+            </CollapseHeader>
+            <CollapseBody>
+              <Paragraph>{firestoreUser?.phone || "9090909090"}</Paragraph>
+            </CollapseBody>
+          </Collapse>
         </View>
-
+        
         <View style={styles.listContainer}>
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
-      {/* <View style={styles.bottomContainer}>
+      <View style={styles.bottomContainer}>
         <TouchableOpacity
           onPress={() => {
-            // handleShare();
             console.log("Share Clicked...!!!");
+            handleShare();
           }}
         >
           <View style={styles.bottomListItem}>
@@ -87,6 +149,19 @@ function CustomDrawer(props) {
           onPress={() => {
             // signOut();
             console.log("logout");
+            return Alert.alert('Logout', "Do you want to logout?", [
+              {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+              {
+                  text: 'OK', 
+                  onPress: () => {
+                      console.log('OK Pressed')
+                  },
+              }  
+            ]);
           }}
         >
           <View style={styles.bottomListItem}>
@@ -94,7 +169,7 @@ function CustomDrawer(props) {
             <Text style={{ marginLeft: 5 }}>Sign Out</Text>
           </View>
         </TouchableOpacity>
-      </View> */}
+      </View>
     </View>
   );
 }

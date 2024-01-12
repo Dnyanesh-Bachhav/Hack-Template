@@ -3,8 +3,9 @@ import React from 'react';
 import Splash from './normal/Splash';
 import Parent from './normal/Parent';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
@@ -12,7 +13,7 @@ const AppNavigator = () => {
         <Stack.Screen
           name="Splash"
           component={Splash}
-          options={{headerShown: true}}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Parent"
