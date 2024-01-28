@@ -22,12 +22,14 @@ import { useContext, useEffect, useState } from "react";
 import { Paragraph, SizableText } from "tamagui";
 import { Accordion } from "tamagui";
 import { Square } from "tamagui";
-import { ChevronDown } from "@tamagui/lucide-icons";
+import { ChevronDown, Edit3 } from "@tamagui/lucide-icons";
 import * as Sharing from "expo-sharing";
 import { Asset, useAssets } from "expo-asset";
 import * as FileSystem from "expo-file-system";
 import { Collapse, CollapseBody, CollapseHeader } from "accordion-collapse-react-native";
 import { AuthContext } from "../../contexts/AuthProviderContext";
+import { Avatar, Button } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 // import {
 //   Collapse,
 //   CollapseHeader,
@@ -38,6 +40,7 @@ const Drawer = createDrawerNavigator();
 
 function CustomDrawer(props) {
   const { user, setUser, firestoreUser, signOut } = useContext(AuthContext);
+  const navigation = useNavigation();
   const [open,setOpen] = useState(false);
   const handleShare = async () => {
     const isAvailable = await Sharing.isAvailableAsync();
@@ -93,13 +96,20 @@ function CustomDrawer(props) {
               style={{ width: 80, height: 80, borderRadius: 40 }}
             />
           </View>
-          <SizableText
-            size={"$7"}
-            fontWeight={"bold"}
-            style={{ marginLeft: 0 }}
-          >
-            {firestoreUser?.name}
-          </SizableText>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <SizableText
+              size={"$7"}
+              fontWeight={"bold"}
+              style={{ marginLeft: 0 }}
+              >
+              {firestoreUser?.name}
+            </SizableText>
+            {/* <Edit3 style={{ backgroundColor: COLORS.primaryFaint, paddingHorizontal: 15, paddingVertical: 10, borderRadius: 1 }} size={"$1"} /> */}
+            <Button icon="account-edit-outline" mode="contained-tonal" maxFontSizeMultiplier={1} onPress={() => navigation.navigate("Profile") }>
+              Edit
+            </Button>
+            {/* <Avatar.Icon size={34} style={{ backgroundColor: COLORS.primaryFaint, color: COLORS.black, fontWeight: '900' }} color={COLORS.primary} icon="account-edit-outline" /> */}
+            </View>
           <Collapse onToggle={(val)=>{
             setOpen(val);
           }} >
