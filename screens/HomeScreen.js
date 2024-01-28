@@ -3,7 +3,7 @@ import Header from "../components/global/Header";
 // import { Button } from "tamagui";
 import { APP, COLORS } from "../components/constants";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Image, Modal, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../contexts/AuthProviderContext";
 import NetInfo from "@react-native-community/netinfo";
@@ -14,6 +14,7 @@ import Loader from "../components/global/Loader";
 import { SizableText } from "tamagui";
 import FileUpload from "../components/global/FileUpload";
 import Box from "../components/global/Box";
+import { Divider, FAB, Modal, Portal, TextInput } from "react-native-paper";
 
 // const { View, Text, StyleSheet } from "react-native";
 
@@ -22,6 +23,15 @@ function HomeScreen({ navigation }) {
   const { user, firestoreUser, setFirestoreUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const animationRef = useRef(null);
+  const [ text, setText ] = useState(null);
+  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+
+  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+  const [visible, setVisible] = React.useState(false);
+  
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = {backgroundColor: 'white', padding: 20, margin: 20, borderRadius: 15, height: 200 };
 
   const checkConnection = async () => {
     const data = await NetInfo.fetch();
@@ -29,20 +39,6 @@ function HomeScreen({ navigation }) {
     setConnected(data.isConnected);
   };
 
-  const ModalPopUp = ({ visible, children }) => {
-    return (
-      <Modal
-        transparent
-        visible={loading}
-        style={{ width: "100%", height: "100%" }}
-        animationType="fade"
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalData}>{children}</View>
-        </View>
-      </Modal>
-    );
-  };
 
   async function getUserdataFirestore() {
     setLoading(true);
@@ -73,7 +69,7 @@ function HomeScreen({ navigation }) {
       />
       <View style={styles.contentContainer}>
         {/* <Text>Hello World...!!!</Text> */}
-        <Box>
+        {/* <Box>
           <SizableText size={"$8"} fontWeight={"bold"}>
             Guidelines
           </SizableText>
@@ -85,8 +81,29 @@ function HomeScreen({ navigation }) {
           </SizableText>
 
           <SizableText>2. Visit a chatbot screen for any queries.</SizableText>
-        </Box>
-        <FileUpload />
+        </Box> */}
+        {/* <FileUpload /> */}
+        <TextInput
+      label="Email"
+      value={text}
+      onChangeText={text => setText(text)}
+    />
+    <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
+    
+    <Divider />
+    <FAB
+    icon="plus"
+    // style={styles.fab}
+    onPress={() => console.log('Pressed')}
+  />
+  <Portal>
+        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+          <Text>Example Modal.  Click outside this area to dismiss.</Text>
+        </Modal>
+      </Portal>
+      <TouchableOpacity style={{marginTop: 30}} onPress={showModal}>
+        <Text>Show</Text>
+      </TouchableOpacity>
         {/* <Loader /> */}
         {/* <Button icon={Plus}>Hello world</Button> */}
       </View>

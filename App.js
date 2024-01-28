@@ -14,6 +14,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Splash from "./Navigation/normal/Splash";
 import Parent from "./Navigation/normal/Parent";
 import { AuthProvider } from "./contexts/AuthProviderContext";
+import { PaperProvider } from "react-native-paper";
 const tamaguiConfig = createTamagui(config);
 
 const Stack = createStackNavigator();
@@ -25,12 +26,13 @@ export default function App() {
   return (
     <View style={styles.container}>
        <TamaguiProvider config={config}>
-        <AuthProvider>
-
-        <NavigationContainer>
-          <AppNavigator/>
-        </NavigationContainer>
-        </AuthProvider>
+        <PaperProvider>
+          <AuthProvider>
+            <NavigationContainer>
+              <AppNavigator/>
+            </NavigationContainer>
+          </AuthProvider>
+        </PaperProvider>
       </TamaguiProvider>
       <StatusBar style="auto" backgroundColor={"#632791"} />
     </View>
