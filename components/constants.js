@@ -1,3 +1,6 @@
+const APP = {
+    name: "CoinStack",
+};
 const COLORS = {
     primary: "#892ECC",    
     primaryFaint: "#f2edf5",
@@ -10,4 +13,4 @@ const COLORS = {
     black: "#212529",
     white: "#f8f9fa"
 }
-export { COLORS };
+export { COLORS, APP };

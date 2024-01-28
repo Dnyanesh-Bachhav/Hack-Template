@@ -36,8 +36,8 @@ function OnboardingScreen({ navigation }) {
                 />
                 </View>
             ),
-            title: "Onboarding",
-            subtitle: "Done with React Native Onboarding Swiper",
+            title: "Welcome to Help Desk AI",
+            subtitle: "Your Smart Banking Assistant powered by RBI guidelines.",
           },
           {
             backgroundColor: "#fef3c7",
@@ -57,8 +57,8 @@ function OnboardingScreen({ navigation }) {
               />
               </View>
             ),
-            title: "Onboarding",
-            subtitle: "Done with React Native Onboarding Swiper",
+            title: "Questions about RBI guidelines?",
+            subtitle: "Ask anytime, we're here to help!",
           },
           {
             backgroundColor: '#a78bfa',
@@ -76,8 +76,8 @@ function OnboardingScreen({ navigation }) {
             loop
             source={require('../assets/Security.json')}
         /></View>,
-            title: 'Onboarding',
-            subtitle: 'Done with React Native Onboarding Swiper',
+            title: 'Seamless Banking Guidance',
+            subtitle: 'Seamless Guidance through Banking Guidelines',
             },
         ]}
       />

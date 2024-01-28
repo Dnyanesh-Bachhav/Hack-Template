@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { COLORS } from "../../components/constants";
 import HomeStack from "../../Stacks/HomeStack";
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
+import ChatStack from "../../Stacks/ChatStack";
 
 
 const Tab = createBottomTabNavigator();
@@ -48,16 +49,16 @@ function Tabs(){
                     </View>
                 )
             }} />
-            <Tab.Screen name="HomeScreen1" component={HomeStack} options={{
+            <Tab.Screen name="Chatbot" component={ChatStack} options={{
                 headerShown: false,
                 tabBarIcon: ({focused})=>(
                     <View style={styles.tabOption }>
-                        <Image source={require("../../assets/Home.png")} style={{
+                        <Image source={require("../../assets/chatbot.png")} style={{
                             tintColor: focused ? COLORS.primary : COLORS.black,
                             ...styles.imgStyle}}/>
                         {
                             focused &&
-                            <Text numberOfLines={1} style={{color: focused ? COLORS.primary : COLORS.black,}} >Home</Text>
+                            <Text numberOfLines={1} style={{color: focused ? COLORS.primary : COLORS.black,}} >Chat</Text>
                         }
                     </View>
                 )

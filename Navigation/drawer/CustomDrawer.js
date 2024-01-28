@@ -69,8 +69,8 @@ function CustomDrawer(props) {
     }
   };
   useEffect(() => {
-    // console.log("User on custome drawer:" + JSON.stringify(user));
-  }, []);
+    console.log("User on custome drawer:" + JSON.stringify(user));
+    }, []);
   return (
     <View style={styles.container}>
       <DrawerContentScrollView
