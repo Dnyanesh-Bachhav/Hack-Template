@@ -15,6 +15,7 @@ import { SizableText } from "tamagui";
 import FileUpload from "../components/global/FileUpload";
 import Box from "../components/global/Box";
 import { Divider, FAB, Modal, Portal, TextInput } from "react-native-paper";
+import List from "../components/global/List";
 
 // const { View, Text, StyleSheet } from "react-native";
 
@@ -83,19 +84,20 @@ function HomeScreen({ navigation }) {
           <SizableText>2. Visit a chatbot screen for any queries.</SizableText>
         </Box> */}
         {/* <FileUpload /> */}
-        <TextInput
+        {/* <TextInput
       label="Email"
       value={text}
       onChangeText={text => setText(text)}
-    />
-    <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
+    /> */}
+    {/* <Switch value={isSwitchOn} onValueChange={onToggleSwitch} /> */}
+    {/* <List/> */}
     
-    <Divider />
-    <FAB
+    {/* <Divider /> */}
+    {/* <FAB
     icon="plus"
     // style={styles.fab}
     onPress={() => console.log('Pressed')}
-  />
+  /> */}
   <Portal>
         <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
           <Text>Example Modal.  Click outside this area to dismiss.</Text>
