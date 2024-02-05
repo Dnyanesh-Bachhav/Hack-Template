@@ -1,6 +1,35 @@
+import banner1 from '../assets/banner1.png';
+import banner2 from '../assets/banner2.png';
+import banner3 from '../assets/banner3.png';
+import banner4 from '../assets/banner4.png';
+import banner5 from '../assets/banner5.png';
 const APP = {
     name: "CoinStack",
 };
+
+const banners = [
+    {
+      id: 1,
+      imgSrc: banner1,
+    },
+    {
+      id: 2,
+      imgSrc: banner2,
+    },
+    {
+      id: 3,
+      imgSrc: banner3,
+    },
+    {
+      id: 4,
+      imgSrc: banner4,
+    },
+    {
+      id: 5,
+      imgSrc: banner5,
+    }
+  ];
+
 const COLORS = {
     primary: "#892ECC",    
     primaryFaint: "#f2edf5",
@@ -65,4 +94,4 @@ const LIST_DATA = [
         age: 22,
     },
 ]
-export { COLORS, APP, LIST_DATA };
+export { COLORS, APP, LIST_DATA, banners };

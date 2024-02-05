@@ -16,6 +16,7 @@ import FileUpload from "../components/global/FileUpload";
 import Box from "../components/global/Box";
 import { Divider, FAB, Modal, Portal, TextInput } from "react-native-paper";
 import List from "../components/global/List";
+import Slider from "../components/global/Slider";
 
 // const { View, Text, StyleSheet } from "react-native";
 
@@ -103,6 +104,7 @@ function HomeScreen({ navigation }) {
           <Text>Example Modal.  Click outside this area to dismiss.</Text>
         </Modal>
       </Portal>
+      <Slider/>
       <TouchableOpacity style={{marginTop: 30}} onPress={showModal}>
         <Text>Show</Text>
       </TouchableOpacity>
