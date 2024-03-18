@@ -4,7 +4,7 @@ import banner3 from '../assets/banner3.png';
 import banner4 from '../assets/banner4.png';
 import banner5 from '../assets/banner5.png';
 const APP = {
-    name: "CoinStack",
+    name: "Cakies",
 };
 
 const banners = [

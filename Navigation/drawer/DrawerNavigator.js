@@ -5,13 +5,14 @@ import { COLORS } from '../../components/constants';
 import Main1 from './Main1';
 import { FontAwesome } from '@expo/vector-icons';
 import HomeStack from '../../Stacks/HomeStack';
+import { Text, View } from 'react-native';
 const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => {
     useEffect(()=>{
         console.log("Drawer...");
     },[]);
     return(
-        <Drawer.Navigator drawerContent={(props)=> <CustomDrawer {...props} />} screenOptions={{
+        <Drawer.Navigator screenOptions={{
             headerShown: false,
             drawerActiveBackgroundColor: COLORS.primary,
             drawerActiveTintColor: COLORS.white,
@@ -24,9 +25,10 @@ const DrawerNavigator = () => {
             <Drawer.Screen name="Main " component={Main1} options={{
                 drawerIcon: ({color})=>(
                     <FontAwesome name="home" size={24} color={color} />
-                )
-            }} />
-             <Drawer.Screen name="Home " component={HomeStack} options={{
+                    )
+                }} />
+                
+             <Drawer.Screen name="Home1 " component={HomeStack} options={{
                 drawerIcon: ({color})=>(
                     <FontAwesome name="home" size={24} color={color} />
                 )
